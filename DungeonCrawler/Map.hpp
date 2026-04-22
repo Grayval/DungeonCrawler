@@ -3,7 +3,7 @@
 #include <vector>
 
 const int GRID_WIDTH = 25;
-const int GRID_HEIGHT = 18;
+const int GRID_HEIGHT = 19;
 
 
 class Map
