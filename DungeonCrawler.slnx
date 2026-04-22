@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="DungeonCrawler/DungeonCrawler.vcxproj" Id="40053757-cdb7-4da0-bb28-af4c2a261364" />
+</Solution>
