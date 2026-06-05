@@ -8,28 +8,28 @@ class Enemy
 {
 	public:
 		Enemy();
-		void enemy_ai(sf::Vector2f playerPosition, float deltaTime, Map& map);
-		void e_Draw(sf::RenderWindow& window);
-		void e_Update(float deltatime);
+		void enemyAi(sf::Vector2f playerPosition, float deltaTime, Map& map);
+		void draw(sf::RenderWindow& window);
+		void update(float deltatime);
 		void takeDamage(int amount);
-		int e_GetHealth() { return e_Health; }
-		sf::Vector2f e_GetPosition() { return e_Position; }
-		sf::FloatRect get_e_Shape() { return e_Shape.getGlobalBounds(); }
-		int getDamage() { return e_Damage; }
-		void e_SetPosition(sf::Vector2f pos, Map& map);
-		bool e_GetIsInvincible() { return e_IsInvincible; }
-		bool e_GetDead() { return e_Health <= 0; }
-		void e_Respawn();
+		int getHealth() { return health; }
+		sf::Vector2f getPosition() { return position; }
+		sf::FloatRect getShape() { return shape.getGlobalBounds(); }
+		int getDamage() { return damage; }
+		void setPosition(sf::Vector2f pos, Map& map);
+		bool getIsInvincible() { return isInvincible; }
+		bool getDead() { return health <= 0; }
+		void respawn();
 
 
 	private:
-		sf::RectangleShape e_Shape;
-		sf::Vector2f e_Position;
-		float e_Speed;
-		int e_Health;
-		int e_Damage;
-		bool e_IsInvincible;
-		float e_InvincibilityTimer;
-		float e_RespawnTimer;
-		bool e_IsDead;
+		sf::RectangleShape shape;
+		sf::Vector2f position;
+		float speed;
+		int health;
+		int damage;
+		bool isInvincible;
+		float invincibilityTimer;
+		float respawnTimer;
+		bool isDead;
 };

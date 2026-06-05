@@ -21,7 +21,7 @@ Player::Player()
 	shape.setPosition(position);
 }
 
-void Player::handleinput(float deltatime, Map& map)
+void Player::handleInput(float deltatime, Map& map)
 {
 	if (dead) return;
 

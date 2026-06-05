@@ -6,17 +6,17 @@ class Player
 {
 public:
     Player();
-    void handleinput(float deltatime, Map& map);
+    void handleInput(float deltatime, Map& map);
     void draw(sf::RenderWindow& window);
     void update(float deltatime);
     sf::Vector2f getPosition() { return position; }
     void takeDamage(int amount);
     int getHealth() { return health; }
-    sf::FloatRect get_shape() { return shape.getGlobalBounds(); }
+    sf::FloatRect getShape() { return shape.getGlobalBounds(); }
     int getDamage() { return damage; }
     void setPosition(sf::Vector2f pos) { position = pos; }
     bool getIsInvincible() { return isInvincible; }
-    bool GetDead() { return dead; }
+    bool getDead() { return dead; }
     void respawn();
 
 private:

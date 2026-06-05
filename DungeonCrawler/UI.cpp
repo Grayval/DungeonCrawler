@@ -29,11 +29,11 @@ void UI::draw(Player& health, Enemy& e_Health, sf::RenderWindow& window)
     window.draw(hpBar);
 
 
-    float e_BarWidth = (e_Health.e_GetHealth() / (float)maxHealth) * 32.f;
+    float e_BarWidth = (e_Health.getHealth() / (float)maxHealth) * 32.f;
     hpBar.setSize(sf::Vector2f(e_BarWidth, 5.f));
 
 
-    sf::Vector2f e_Pos = e_Health.e_GetPosition();
+    sf::Vector2f e_Pos = e_Health.getPosition();
     hpBarBackground.setPosition(sf::Vector2f(e_Pos.x, e_Pos.y - 8.f));
     hpBar.setPosition(sf::Vector2f(e_Pos.x, e_Pos.y - 8.f));
 

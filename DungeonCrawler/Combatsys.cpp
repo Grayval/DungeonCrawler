@@ -8,15 +8,15 @@
 CombatSys::CombatSys()
 {
 	damageTimer = 0.f;
-    player_AttackTimer = 0.5f;
-    player_DamageTimer = 0.f;
+    playerAttackTimer = 0.5f;
+    playerDamageTimer = 0.f;
 }
 
 void CombatSys::checkCombat(Player& player, Enemy& enemy, float deltaTime, bool playerAttacked)
 {
     damageTimer += deltaTime;
 
-    if (player.get_shape().findIntersection(enemy.get_e_Shape()))
+    if (player.getShape().findIntersection(enemy.getShape()))
     {
         if (damageTimer >= 3.0f && !player.getIsInvincible())
         {
@@ -25,13 +25,13 @@ void CombatSys::checkCombat(Player& player, Enemy& enemy, float deltaTime, bool 
         }
     }
 
-    player_AttackTimer += deltaTime;
+    playerAttackTimer += deltaTime;
 
     if (playerAttacked)
     {
-        if (player.get_shape().findIntersection(enemy.get_e_Shape()))
+        if (player.getShape().findIntersection(enemy.getShape()))
         {
-            if (!enemy.e_GetIsInvincible())
+            if (!enemy.getIsInvincible())
             {
                 enemy.takeDamage(player.getDamage());
             }

@@ -4,126 +4,126 @@
 
 Enemy::Enemy()
 {
-	e_Health = 100;
-	e_Damage = 25;
-	e_Speed = 100.f;
-	e_IsInvincible = false;
-	e_InvincibilityTimer = 0.f;
-	e_IsDead = false;
-	e_RespawnTimer = 0.f;
-	e_Position = sf::Vector2f(500.f, 500.f);
+	health = 100;
+	damage = 25;
+	speed = 100.f;
+	isInvincible = false;
+	invincibilityTimer = 0.f;
+	isDead = false;
+	respawnTimer = 0.f;
+	position = sf::Vector2f(500.f, 500.f);
 
-	e_Shape.setSize(sf::Vector2f(32.f, 32.f));
-	e_Shape.setFillColor(sf::Color::Cyan);
-	e_Shape.setPosition(e_Position);
+	shape.setSize(sf::Vector2f(32.f, 32.f));
+	shape.setFillColor(sf::Color::Cyan);
+	shape.setPosition(position);
 }
 
 void Enemy::takeDamage(int amount)
 {
-	e_Health -= amount;
-	if (e_Health <= 0)
+	health -= amount;
+	if (health <= 0)
 	{
-		e_Health = 0;
-		e_IsDead = true;
-		e_RespawnTimer = 0.f;
+		health = 0;
+		isDead = true;
+		respawnTimer = 0.f;
 		return;
 	}
-	e_IsInvincible = true;
-	e_InvincibilityTimer = 0.f;
+	isInvincible = true;
+	invincibilityTimer = 0.f;
 }
 
-void Enemy::e_Update(float deltaTime)
+void Enemy::update(float deltaTime)
 {
-	e_Shape.setPosition(e_Position);
+	shape.setPosition(position);
 
-	if (e_IsInvincible)
+	if (isInvincible)
 	{
-		e_InvincibilityTimer += deltaTime;
+		invincibilityTimer += deltaTime;
 
-		if ((int)(e_InvincibilityTimer * 10) % 2 == 0)
-			e_Shape.setFillColor(sf::Color::Cyan);
+		if ((int)(invincibilityTimer * 10) % 2 == 0)
+			shape.setFillColor(sf::Color::Cyan);
 		else
-			e_Shape.setFillColor(sf::Color::Transparent);
+			shape.setFillColor(sf::Color::Transparent);
 
-		if (e_InvincibilityTimer >= 3.0f)
+		if (invincibilityTimer >= 3.0f)
 		{
-			e_IsInvincible = false;
-			e_InvincibilityTimer = 0.f;
-			e_Shape.setFillColor(sf::Color::Cyan);
+			isInvincible = false;
+			invincibilityTimer = 0.f;
+			shape.setFillColor(sf::Color::Cyan);
 		}
 	}
 
-	if (e_IsDead)
+	if (isDead)
 	{
-		e_RespawnTimer += deltaTime;
+		respawnTimer += deltaTime;
 
-		if ((int)(e_RespawnTimer * 10) % 2 == 0)
-			e_Shape.setFillColor(sf::Color::Cyan);
+		if ((int)(respawnTimer * 10) % 2 == 0)
+			shape.setFillColor(sf::Color::Cyan);
 		else
-			e_Shape.setFillColor(sf::Color::Transparent);
+			shape.setFillColor(sf::Color::Transparent);
 
-		if (e_RespawnTimer >= 3.0f)
-			e_Respawn();
+		if (respawnTimer >= 3.0f)
+			respawn();
 	}
 }
 
-void Enemy::e_Draw(sf::RenderWindow& window)
+void Enemy::draw(sf::RenderWindow& window)
 {
-	window.draw(e_Shape);
+	window.draw(shape);
 }
 
-void Enemy::e_Respawn()
+void Enemy::respawn()
 {
-	e_Health = 100;
-	e_IsDead = false;
-	e_RespawnTimer = 0.f;
-	e_IsInvincible = false;
-	e_InvincibilityTimer = 0.f;
+	health = 100;
+	isDead = false;
+	respawnTimer = 0.f;
+	isInvincible = false;
+	invincibilityTimer = 0.f;
 
-	int randX = (rand() % (GRID_WIDTH - 2)) + 1;
-	int randY = (rand() % (GRID_HEIGHT - 2)) + 1;
-	e_Position = sf::Vector2f(randX * 32.f, randY * 32.f);
+	int randX = (rand() % (Map::GRID_WIDTH - 2)) + 1;
+	int randY = (rand() % (Map::GRID_HEIGHT - 2)) + 1;
+	position = sf::Vector2f(randX * 32.f, randY * 32.f);
 
-	e_Shape.setFillColor(sf::Color::Cyan);
+	shape.setFillColor(sf::Color::Cyan);
 }
 
-void Enemy::enemy_ai(sf::Vector2f playerPosition, float deltaTime, Map& map)
+void Enemy::enemyAi(sf::Vector2f playerPosition, float deltaTime, Map& map)
 {
-	if (e_IsDead) return;
+	if (isDead) return;
 
-	sf::Vector2f e_OldPosition = e_Position;
+	sf::Vector2f oldPosition = position;
 
-	sf::Vector2f direction = playerPosition - e_Position;
+	sf::Vector2f direction = playerPosition - position;
 	float length = sqrt(direction.x * direction.x + direction.y * direction.y);
 	if (length > 1.0f)
 		direction /= length;
 
-	e_Position.x += direction.x * e_Speed * deltaTime;
+	position.x += direction.x * speed * deltaTime;
 
-	int gridX = (int)(e_Position.x / 32);
-	int gridY = (int)(e_Position.y / 32);
-	int gridX2 = (int)(e_Position.x + 31) / 32;
-	int gridY2 = (int)(e_Position.y + 31) / 32;
+	int gridX = (int)(position.x / 32);
+	int gridY = (int)(position.y / 32);
+	int gridX2 = (int)(position.x + 31) / 32;
+	int gridY2 = (int)(position.y + 31) / 32;
 
 	if (map.isWall(gridX, gridY) || map.isWall(gridX2, gridY) ||
 		map.isWall(gridX, gridY2) || map.isWall(gridX2, gridY2))
-		e_Position.x = e_OldPosition.x;
+		position.x = oldPosition.x;
 
-	e_Position.y += direction.y * e_Speed * deltaTime;
+	position.y += direction.y * speed * deltaTime;
 
-	gridX = (int)(e_Position.x / 32);
-	gridY = (int)(e_Position.y / 32);
-	gridX2 = (int)(e_Position.x + 31) / 32;
-	gridY2 = (int)(e_Position.y + 31) / 32;
+	gridX = (int)(position.x / 32);
+	gridY = (int)(position.y / 32);
+	gridX2 = (int)(position.x + 31) / 32;
+	gridY2 = (int)(position.y + 31) / 32;
 
 	if (map.isWall(gridX, gridY) || 
 		map.isWall(gridX2, gridY) ||
 		map.isWall(gridX, gridY2) || 
 		map.isWall(gridX2, gridY2))
 
-		e_Position.y = e_OldPosition.y;
+		position.y = oldPosition.y;
 }
-void Enemy::e_SetPosition(sf::Vector2f pos, Map& map)
+void Enemy::setPosition(sf::Vector2f pos, Map& map)
 {
 	int gridX = (int)(pos.x / 32);
 	int gridY = (int)(pos.y / 32);
@@ -132,5 +132,5 @@ void Enemy::e_SetPosition(sf::Vector2f pos, Map& map)
 
 	if (!map.isWall(gridX, gridY) && !map.isWall(gridX2, gridY) &&
 		!map.isWall(gridX, gridY2) && !map.isWall(gridX2, gridY2))
-		e_Position = pos;
+		position = pos;
 }

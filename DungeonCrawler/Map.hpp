@@ -2,13 +2,12 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-const int GRID_WIDTH = 25;
-const int GRID_HEIGHT = 19;
-
 
 class Map
 {
 public:
+    static constexpr int GRID_WIDTH = 25;
+    static constexpr int GRID_HEIGHT = 19;
     Map();
     void draw(sf::RenderWindow& window);
     bool isWall(int x, int y);

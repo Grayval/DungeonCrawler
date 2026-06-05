@@ -3,6 +3,14 @@ A DungeonCrawler with RPG Elements written with SFML
 
 
 # Controls
-	WSAD -Movement
-	Spacebar Attack
+WASD Movement
+Spacebar Attack
+
+
+#Required Dependencies
+SFML 3.1.0
+
+# Screenshots
+
+![Gameplay](Screenshots/gameplay.png)
 	

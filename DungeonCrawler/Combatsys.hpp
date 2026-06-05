@@ -12,7 +12,7 @@ public:
 
 private:
 	float damageTimer;
-	float player_DamageTimer;
-	float player_AttackTimer;
+	float playerDamageTimer;
+	float playerAttackTimer;
 
 };

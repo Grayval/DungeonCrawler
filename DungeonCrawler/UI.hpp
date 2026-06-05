@@ -7,7 +7,7 @@ class UI
 {
 public:
 	UI();
-	void draw(Player& health, Enemy& e_Health, sf::RenderWindow& window);
+	void draw(Player& player, Enemy& enemy, sf::RenderWindow& window);
 
 private:
 	int maxHealth;
