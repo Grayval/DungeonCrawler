@@ -7,7 +7,7 @@ WASD Movement
 Spacebar Attack
 
 
-#Required Dependencies
+# Required Dependencies
 SFML 3.1.0
 
 # Screenshots
