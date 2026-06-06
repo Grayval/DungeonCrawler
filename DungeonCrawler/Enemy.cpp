@@ -4,9 +4,11 @@
 
 Enemy::Enemy()
 {
-	health = 100;
+	health = 100.0f;
+	maxHealth = 100.0f;
 	damage = 25;
 	speed = 100.f;
+	level = 1;
 	isInvincible = false;
 	invincibilityTimer = 0.f;
 	isDead = false;
@@ -133,4 +135,14 @@ void Enemy::setPosition(sf::Vector2f pos, Map& map)
 	if (!map.isWall(gridX, gridY) && !map.isWall(gridX2, gridY) &&
 		!map.isWall(gridX, gridY2) && !map.isWall(gridX2, gridY2))
 		position = pos;
+}
+
+float Enemy::getMaxHealth()
+{
+	return maxHealth;
+}
+
+int Enemy::getLevel()
+{
+	return level;
 }

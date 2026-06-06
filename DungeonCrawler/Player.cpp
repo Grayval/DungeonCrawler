@@ -5,7 +5,8 @@
 
 Player::Player()
 {
-	health = 100;
+	health = 100.0f;
+	maxHealth = 100.0f;
 	mana = 100;
 	experience = 0;
 	level = 1;
@@ -34,11 +35,11 @@ void Player::handleInput(float deltatime, Map& map)
 
 	int gridX = (int) (position.x / 32);
 	int gridY = (int) (position.y / 32);
-	int gridX_2 = (int) (position.x + 31) / 32;
-	int gridY_2 = (int) (position.y + 31) / 32;
+	int gridX2 = (int) (position.x + 31) / 32;
+	int gridY2 = (int) (position.y + 31) / 32;
 
-	if (map.isWall(gridX, gridY) || map.isWall(gridX_2, gridY) ||
-		map.isWall(gridX, gridY_2) || map.isWall(gridX_2, gridY_2))
+	if (map.isWall(gridX, gridY) || map.isWall(gridX2, gridY) ||
+		map.isWall(gridX, gridY2) || map.isWall(gridX2, gridY2))
 		position.x = oldPosition.x;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
@@ -48,14 +49,14 @@ void Player::handleInput(float deltatime, Map& map)
 
 	gridX = (int) (position.x / 32);
 	gridY = (int) (position.y / 32);
-	gridX_2 = (int) (position.x + 31) / 32;
-	gridY_2 = (int) (position.y + 31) / 32;
+	gridX2 = (int) (position.x + 31) / 32;
+	gridY2 = (int) (position.y + 31) / 32;
 
 
 	if (map.isWall(gridX, gridY) ||
-		map.isWall(gridX_2, gridY) ||
-		map.isWall(gridX, gridY_2) ||
-		map.isWall(gridX_2, gridY_2))
+		map.isWall(gridX2, gridY) ||
+		map.isWall(gridX, gridY2) ||
+		map.isWall(gridX2, gridY2))
 		position = oldPosition;
 
 
@@ -125,4 +126,14 @@ void Player::respawn()
 void Player::draw(sf::RenderWindow& window)
 {
 	window.draw(shape);
+}
+
+int Player::getLevel() const
+{
+	return level;
+}
+
+float Player::getMaxHealth()
+{
+	return maxHealth;
 }

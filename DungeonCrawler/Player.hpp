@@ -11,19 +11,22 @@ public:
     void update(float deltatime);
     sf::Vector2f getPosition() { return position; }
     void takeDamage(int amount);
-    int getHealth() { return health; }
+    float getHealth() { return health; }
     sf::FloatRect getShape() { return shape.getGlobalBounds(); }
     int getDamage() { return damage; }
     void setPosition(sf::Vector2f pos) { position = pos; }
     bool getIsInvincible() { return isInvincible; }
     bool getDead() { return dead; }
     void respawn();
+    int getLevel() const;
+    float getMaxHealth();
 
 private:
     sf::RectangleShape shape;
     sf::Vector2f position;
     float speed;
-    int health;
+    float health;
+    float maxHealth;
     int experience;
     int mana;
     int level;

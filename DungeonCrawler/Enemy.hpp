@@ -12,7 +12,7 @@ class Enemy
 		void draw(sf::RenderWindow& window);
 		void update(float deltatime);
 		void takeDamage(int amount);
-		int getHealth() { return health; }
+		float getHealth() { return health; }
 		sf::Vector2f getPosition() { return position; }
 		sf::FloatRect getShape() { return shape.getGlobalBounds(); }
 		int getDamage() { return damage; }
@@ -20,13 +20,17 @@ class Enemy
 		bool getIsInvincible() { return isInvincible; }
 		bool getDead() { return health <= 0; }
 		void respawn();
+		float getMaxHealth();
+		int getLevel();
 
 
 	private:
 		sf::RectangleShape shape;
 		sf::Vector2f position;
 		float speed;
-		int health;
+		float health;
+		float maxHealth;
+		int level;
 		int damage;
 		bool isInvincible;
 		float invincibilityTimer;
